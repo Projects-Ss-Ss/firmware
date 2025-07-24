@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="images/hgu6.png">
-    <title>Consulta de Firmware</title>
+    <title>Firmware Finder</title>
     <style>
         * {
             box-sizing: border-box;
@@ -111,7 +111,7 @@
         
         .header-container {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
             margin-bottom: 15px;
             flex-wrap: wrap;
@@ -121,6 +121,8 @@
         .header-container h1 {
             text-align: left;
             flex: 1;
+            margin: 0;
+            padding-right: 10px;
         }
         
         .refresh-btn {
@@ -128,14 +130,18 @@
             color: white;
             border: none;
             padding: 8px 12px;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            gap: 6px;
             font-size: 12px;
+            font-weight: 500;
             transition: all 0.3s;
-            min-width: 80px;
+            min-width: 70px;
+            height: 32px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .refresh-btn:hover {
@@ -145,8 +151,8 @@
 
         .refresh-btn svg {
             transition: transform 0.3s;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
         }
 
         .refresh-btn:hover svg {
@@ -266,8 +272,9 @@
         h1 {
             color: #6f42c1;
             margin: 0;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
+            line-height: 1.2;
         }
         
         h3 {
@@ -362,7 +369,7 @@
             }
             
             h1 {
-                font-size: 18px;
+                font-size: 20px;
             }
             
             .result-container {
@@ -425,25 +432,32 @@
             }
             
             .header-container {
-                flex-direction: column;
+                flex-direction: row;
                 align-items: flex-start;
-                gap: 15px;
+                gap: 10px;
+                margin-bottom: 20px;
             }
             
             .header-container h1 {
                 text-align: left;
-                width: 100%;
+                width: auto;
+                flex: 1;
+                font-size: 18px;
             }
             
             h1 {
                 font-size: 18px;
                 text-align: left;
-                width: 100%;
+                width: auto;
             }
             
             .refresh-btn {
-                align-self: flex-end;
+                align-self: flex-start;
                 width: auto;
+                min-width: 80px;
+                height: 36px;
+                font-size: 12px;
+                padding: 8px 12px;
             }
             
             .form-group {
@@ -528,7 +542,7 @@
             }
             
             h1 {
-                font-size: 14px;
+                font-size: 16px;
             }
             
             .form-group label {
@@ -546,9 +560,15 @@
             }
             
             .refresh-btn {
-                padding: 5px 8px;
-                font-size: 10px;
-                min-width: 60px;
+                padding: 6px 10px;
+                font-size: 11px;
+                min-width: 70px;
+                height: 32px;
+            }
+            
+            .refresh-btn svg {
+                width: 14px;
+                height: 14px;
             }
             
             .result-container {
@@ -622,8 +642,15 @@
             }
             
             .refresh-btn {
-                padding: 10px 12px;
-                min-height: 44px;
+                padding: 12px 16px;
+                min-height: 48px;
+                font-size: 14px;
+                min-width: 100px;
+            }
+            
+            .refresh-btn svg {
+                width: 18px;
+                height: 18px;
             }
         }
     </style>
@@ -648,7 +675,7 @@
         <!-- Container do formulário centralizado -->
         <div class="container" id="containerElement">
             <div class="header-container">
-                <h1>Consulta de Versão de Firmware</h1>
+                <h1>Firmware Finder</h1>
                 <button type="button" id="refreshBtn" class="refresh-btn">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
