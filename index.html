@@ -408,7 +408,7 @@
             .image-container {
                 width: 80px;
                 top: 15px;
-                left: 8px;
+                left: 20px;
             }
             
             .hgu-container, .hgu6-container {
@@ -524,7 +524,7 @@
             .image-container {
                 width: 70px;
                 top: 10px;
-                left: 5px;
+                left: 15px;
             }
             
             .container {
@@ -595,7 +595,7 @@
             .image-container {
                 width: 70px;
                 top: 10px;
-                left: 8px;
+                left: 18px;
             }
             
             .main-container {
@@ -809,18 +809,35 @@
      
         refreshBtn.addEventListener("click", resetForm);
      
-        // Carrega JSON externo e popula fabricantes
+        // Carrega JSON local primeiro, depois externo como fallback
         window.addEventListener("DOMContentLoaded", () => {
-          fetch("https://projects-ss-ss.github.io/firmware/firmware.json")
-            .then(response => response.json())
+          // Tenta carregar o arquivo local primeiro
+          fetch("./firmware.json")
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Arquivo local não encontrado');
+              }
+              return response.json();
+            })
             .then(json => {
               data = json;
-    const fabricantes = [...new Set(data.map(d => d.FABRICANTE))];
+              const fabricantes = [...new Set(data.map(d => d.FABRICANTE))];
               populateSelect(manufacturerSelect, fabricantes);
             })
             .catch(error => {
-              result.innerHTML = `<p class="error">Erro ao carregar o arquivo JSON.</p>`;
-              console.error("Erro ao carregar firmwares.json:", error);
+              console.log("Tentando carregar arquivo remoto...");
+              // Fallback para o arquivo remoto
+              fetch("https://projects-ss-ss.github.io/firmware/firmware.json")
+                .then(response => response.json())
+                .then(json => {
+                  data = json;
+                  const fabricantes = [...new Set(data.map(d => d.FABRICANTE))];
+                  populateSelect(manufacturerSelect, fabricantes);
+                })
+                .catch(error => {
+                  result.innerHTML = `<p class="error">Erro ao carregar o arquivo JSON.</p>`;
+                  console.error("Erro ao carregar firmwares.json:", error);
+                });
             });
         });
       </script>
