@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="images/hgu6.png">
+    <link rel="icon" type="image/png" href="images/vivinho.png">
     <title>Firmware Finder</title>
     <style>
         * {
@@ -691,8 +691,15 @@
             
             <form id="firmwareForm">
                 <div class="form-group">
+                    <label for="technology">Tecnologia:</label>
+                    <select id="technology" name="technology" required>
+                        <option value="">Selecione uma tecnologia</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
                     <label for="manufacturer">Fabricante:</label>
-                    <select id="manufacturer" name="manufacturer" required>
+                    <select id="manufacturer" name="manufacturer" disabled required>
                         <option value="">Selecione um fabricante</option>
                     </select>
                 </div>
@@ -723,6 +730,7 @@
      
         const manufacturerSelect = document.getElementById("manufacturer");
         const typeSelect = document.getElementById("type");
+        const technologySelect = document.getElementById("technology");
         const modelSelect = document.getElementById("model");
         const result = document.getElementById("result");
         const mainContainer = document.getElementById("mainContainer");
@@ -741,9 +749,11 @@
         }
      
         function resetForm() {
+          technologySelect.value = "";
           manufacturerSelect.value = "";
           typeSelect.value = "";
           modelSelect.value = "";
+          manufacturerSelect.disabled = true;
           typeSelect.disabled = true;
           modelSelect.disabled = true;
           result.classList.remove("show");
@@ -752,11 +762,25 @@
           containerElement.classList.remove("has-result");
         }
      
-        manufacturerSelect.addEventListener("change", () => {
-          const selected = manufacturerSelect.value;
-          if (!selected) return resetForm();
+        technologySelect.addEventListener("change", () => {
+          const tecnologia = technologySelect.value;
+          if (!tecnologia) return resetForm();
      
-          const tipos = [...new Set(data.filter(d => d.FABRICANTE === selected).map(d => d.TIPO))];
+          const fabricantes = [...new Set(data.filter(d => d.TECNOLOGIA === tecnologia).map(d => d.FABRICANTE))];
+          populateSelect(manufacturerSelect, fabricantes);
+          typeSelect.innerHTML = '<option value="">Selecione um tipo</option>';
+          typeSelect.disabled = true;
+          modelSelect.innerHTML = '<option value="">Selecione um modelo</option>';
+          modelSelect.disabled = true;
+          result.classList.remove("show");
+        });
+     
+        manufacturerSelect.addEventListener("change", () => {
+          const tecnologia = technologySelect.value;
+          const fabricante = manufacturerSelect.value;
+          if (!tecnologia || !fabricante) return;
+     
+          const tipos = [...new Set(data.filter(d => d.TECNOLOGIA === tecnologia && d.FABRICANTE === fabricante).map(d => d.TIPO))];
           populateSelect(typeSelect, tipos);
           modelSelect.innerHTML = '<option value="">Selecione um modelo</option>';
           modelSelect.disabled = true;
@@ -764,11 +788,12 @@
         });
      
         typeSelect.addEventListener("change", () => {
+          const tecnologia = technologySelect.value;
           const fabricante = manufacturerSelect.value;
           const tipo = typeSelect.value;
-          if (!fabricante || !tipo) return;
+          if (!tecnologia || !fabricante || !tipo) return;
      
-          const modelos = [...new Set(data.filter(d => d.FABRICANTE === fabricante && d.TIPO === tipo).map(d => d.MODELO))];
+          const modelos = [...new Set(data.filter(d => d.TECNOLOGIA === tecnologia && d.FABRICANTE === fabricante && d.TIPO === tipo).map(d => d.MODELO))];
           populateSelect(modelSelect, modelos);
           result.classList.remove("show");
         });
@@ -777,14 +802,16 @@
           e.preventDefault();
           const fabricante = manufacturerSelect.value;
           const tipo = typeSelect.value;
+          const tecnologia = technologySelect.value;
           const modelo = modelSelect.value;
      
-          const found = data.find(d => d.FABRICANTE === fabricante && d.TIPO === tipo && d.MODELO === modelo);
+          const found = data.find(d => d.FABRICANTE === fabricante && d.TIPO === tipo && d.TECNOLOGIA === tecnologia && d.MODELO === modelo);
      
           if (found) {
             result.innerHTML = `
               <h3 style="text-align: center; color: #6f42c1;">CONSULTA REALIZADA</h3>
               <hr style="border: none; border-top: 1px solid #ddd; margin: 10px 0;">
+              <p><strong>Tecnologia:</strong> ${tecnologia}</p>
               <p><strong>Fabricante:</strong> ${fabricante}</p>
               <p><strong>Tipo:</strong> ${tipo}</p>
               <p><strong>Modelo:</strong> ${modelo}</p>
@@ -798,6 +825,7 @@
             result.innerHTML = `
               <h3 style="text-align: center; color: #6f42c1;">CONSULTA REALIZADA</h3>
               <hr style="border: none; border-top: 1px solid #ddd; margin: 10px 0;">
+              <p><strong>Tecnologia:</strong> ${tecnologia}</p>
               <p><strong>Fabricante:</strong> ${fabricante}</p>
               <p><strong>Tipo:</strong> ${tipo}</p>
               <p><strong>Modelo:</strong> ${modelo}</p>
@@ -809,36 +837,45 @@
      
         refreshBtn.addEventListener("click", resetForm);
      
-        // Carrega JSON local primeiro, depois externo como fallback
+        // Carrega dados estáticos diretamente no código
         window.addEventListener("DOMContentLoaded", () => {
-          // Tenta carregar o arquivo local primeiro
-          fetch("./firmware.json")
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Arquivo local não encontrado');
-              }
-              return response.json();
-            })
-            .then(json => {
-              data = json;
-              const fabricantes = [...new Set(data.map(d => d.FABRICANTE))];
-              populateSelect(manufacturerSelect, fabricantes);
-            })
-            .catch(error => {
-              console.log("Tentando carregar arquivo remoto...");
-              // Fallback para o arquivo remoto
-              fetch("https://projects-ss-ss.github.io/firmware/firmware.json")
-                .then(response => response.json())
-                .then(json => {
-                  data = json;
-                  const fabricantes = [...new Set(data.map(d => d.FABRICANTE))];
-                  populateSelect(manufacturerSelect, fabricantes);
-                })
-                .catch(error => {
-                  result.innerHTML = `<p class="error">Erro ao carregar o arquivo JSON.</p>`;
-                  console.error("Erro ao carregar firmwares.json:", error);
-                });
-            });
+          // Dados do firmware incorporados estaticamente
+          data = [
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2541GNAC-N1", "FIRMWARE": "BR_g7.7_100VNZ0b41 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2541GNAC-N2", "FIRMWARE": "BR_g7.7_100VNZ0b41 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2731GN2A4P", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2731GN2A4P-N2", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2741GNAC-N1", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2741GNAC-N2", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2741GNAC-N2 -SV", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2741GNAC-SV", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 6", "MODELO": "GPT-2742GX4X5v6", "FIRMWARE": "GL_g1.13_100XNT0b17_2_1 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 6", "MODELO": "GPT-2742GX4X5v6-SV", "FIRMWARE": "GL_g1.13_100XNT0b17_2_1 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF3505VW-N1", "FIRMWARE": "BR_SV_g000_R3505VWN1001_s42 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF3505VW-N2", "FIRMWARE": "BR_SV_g000_R3505VWN1001_s42 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF3507VW-N1", "FIRMWARE": "BR_SV_g000_R3505VWN1001_s42 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF3507VW-N2", "FIRMWARE": "BR_SV_g000_R3505VWN1001_s42 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF8115VW", "FIRMWARE": "BR_SV_g13.12_RTF_TEF001_V8.33_V022 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF8115VW-SV", "FIRMWARE": "BR_SV_g13.12_RTF_TEF001_V8.33_V022 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF8117VW", "FIRMWARE": "BR_SV_g13.12_RTF_TEF001_V8.33_V022 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 6", "MODELO": "RTF8225VW", "FIRMWARE": "BR_SV_g1.16_RTF_TEF004_V2.52 - preferred"},
+            {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 6", "MODELO": "RTF8225VW-SV", "FIRMWARE": "BR_SV_g1.16_RTF_TEF004_V2.52 - preferred"},
+            {"TECNOLOGIA": "BASEPORT", "FABRICANTE": "ASKEY", "TIPO": "WIFI 5", "MODELO": "RG3110W", "FIRMWARE": "GL_g8.8_RG3110W0.6.9 - preferred"},
+            {"TECNOLOGIA": "BASEPORT", "FABRICANTE": "MITRA", "TIPO": "WIFI 6", "MODELO": "HGW-500IX4X4-Mv3", "FIRMWARE": "GL_g1.11_100XPD0b12 - preferred"},
+            {"TECNOLOGIA": "BASEPORT", "FABRICANTE": "MITRA", "TIPO": "WIFI 6", "MODELO": "HGW-500SN2A4-Qv3", "FIRMWARE": "GL_g8.6_100WZA0b26 - preferred"},
+            {"TECNOLOGIA": "ATA", "FABRICANTE": "INTELBRAS", "TIPO": "WIFI", "MODELO": "ATA200 2P", "FIRMWARE": "74.19.50.01 2022-09-22 16:11:26 - preferred"},
+            {"TECNOLOGIA": "ATA", "FABRICANTE": "INTELBRAS", "TIPO": "WIFI", "MODELO": "ATA400 4P", "FIRMWARE": "74.19.50.01 2022-09-22 16:11:26 - preferred"},
+            {"TECNOLOGIA": "ATA", "FABRICANTE": "GRANDSTREAM", "TIPO": "WIFI", "MODELO": "HT812 2P (OUI 000B82) ", "FIRMWARE": "1.0.57.1 - preferred"},
+            {"TECNOLOGIA": "ATA", "FABRICANTE": "GRANDSTREAM", "TIPO": "WIFI", "MODELO": "HT814 4P (OUI 000B82)", "FIRMWARE": "1.0.57.1 - preferred"},
+            {"TECNOLOGIA": "ATA", "FABRICANTE": "GRANDSTREAM", "TIPO": "WIFI", "MODELO": "HT818 8P (OUI 000B82)", "FIRMWARE": "1.0.57.1 - preferred"},
+            {"TECNOLOGIA": "ATA", "FABRICANTE": "KHOMP", "TIPO": "WIFI", "MODELO": "KAP302 2P", "FIRMWARE": "V5.2(202304261155) - preferred"},
+            {"TECNOLOGIA": "ATA", "FABRICANTE": "AUDIOCODES", "TIPO": "WIFI", "MODELO": "MP202 2P", "FIRMWARE": "MP202_4_4_9_build_156 - preferred"},
+            {"TECNOLOGIA": "ATA", "FABRICANTE": "AUDIOCODES", "TIPO": "WIFI", "MODELO": "MP204 4P", "FIRMWARE": "MP20x_4_4_9_build_156 - preferred"}
+          ];
+          
+          // Inicializa o campo de tecnologia
+          const tecnologias = [...new Set(data.map(d => d.TECNOLOGIA))];
+          populateSelect(technologySelect, tecnologias);
         });
       </script>
 </body>
