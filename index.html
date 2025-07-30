@@ -20,6 +20,12 @@
             overflow-x: hidden;
         }
         
+        /* Ajuste específico para quando há resultados */
+        body.has-result {
+            min-height: auto;
+            height: auto;
+        }
+        
         .main-container {
             display: flex;
             align-items: center;
@@ -34,10 +40,10 @@
         }
         
         .main-container.has-result {
-            align-items: center;
-            justify-content: center;
+            align-items: flex-start;
+            justify-content: flex-start;
             padding: 20px 10px;
-            min-height: 100vh;
+            min-height: auto;
         }
         
         /* Logo posicionado no canto superior esquerdo */
@@ -347,6 +353,13 @@
                 gap: 20px;
             }
             
+            .main-container.has-result {
+                padding: 10px 5px;
+                padding-bottom: 20px;
+                min-height: auto;
+                gap: 15px;
+            }
+            
             .image-container {
                 width: 90px;
                 top: 15px;
@@ -366,6 +379,7 @@
             .container.has-result {
                 width: 90%;
                 max-height: none;
+                margin-bottom: 15px;
             }
             
             h1 {
@@ -375,6 +389,7 @@
             .result-container {
                 padding: 15px;
                 font-size: 13px;
+                min-height: auto;
             }
             
             .result-container h3 {
@@ -403,8 +418,9 @@
                 justify-content: flex-start;
                 align-items: center;
                 padding-top: 100px;
-                padding-bottom: 30px;
+                padding-bottom: 40px;
                 min-height: auto;
+                gap: 10px;
             }
             
             .image-container {
@@ -526,8 +542,9 @@
                 justify-content: flex-start;
                 align-items: center;
                 padding-top: 90px;
-                padding-bottom: 20px;
+                padding-bottom: 30px;
                 min-height: auto;
+                gap: 8px;
             }
             
             .image-container {
@@ -624,8 +641,9 @@
                 justify-content: flex-start;
                 align-items: center;
                 padding-top: 80px;
-                padding-bottom: 15px;
+                padding-bottom: 25px;
                 min-height: auto;
+                gap: 5px;
             }
             
             .container {
@@ -778,6 +796,7 @@
           result.textContent = "";
           mainContainer.classList.remove("has-result");
           containerElement.classList.remove("has-result");
+          document.body.classList.remove("has-result");
         }
      
         technologySelect.addEventListener("change", () => {
@@ -839,6 +858,7 @@
             result.classList.add("show");
             mainContainer.classList.add("has-result");
             containerElement.classList.add("has-result");
+            document.body.classList.add("has-result");
           } else {
             result.innerHTML = `
               <h3 style="text-align: center; color: #6f42c1;">CONSULTA REALIZADA</h3>
@@ -850,6 +870,9 @@
               <p class="error">Firmware não encontrado.</p>
             `;
             result.classList.add("show");
+            mainContainer.classList.add("has-result");
+            containerElement.classList.add("has-result");
+            document.body.classList.add("has-result");
           }
         });
      
