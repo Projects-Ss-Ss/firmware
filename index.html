@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="images/vivinho.png">
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAA==">
     <title>Firmware Finder</title>
     <style>
         * {
@@ -46,55 +46,9 @@
             min-height: auto;
         }
         
-        /* Logo posicionado no canto superior esquerdo */
-        .image-container {
-            position: fixed;
-            top: 25px;
-            left: 15px;
-            width: 140px;
-            height: auto;
-            z-index: 1000;
-        }
+
         
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        /* Imagem HGU no canto esquerdo central */
-        .hgu-container {
-            position: fixed;
-            left: 110px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 200px;
-            height: auto;
-            z-index: 999;
-        }
-        
-        .hgu-container img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        /* Imagem HGU6 no canto direito central */
-        .hgu6-container {
-            position: fixed;
-            right: 140px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 200px;
-            height: auto;
-            z-index: 999;
-        }
-        
-        .hgu6-container img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
+
         
         .container {
             background-color: white;
@@ -315,22 +269,10 @@
         
         /* Tablets */
         @media (max-width: 1024px) {
-            .image-container {
-                width: 115px;
-                top: 20px;
-                left: 12px;
-            }
+
             
             .hgu-container, .hgu6-container {
-                width: 150px;
-            }
-            
-            .hgu-container {
-                left: 15px;
-            }
-            
-            .hgu6-container {
-                right: 15px;
+                display: none;
             }
             
             .container {
@@ -366,11 +308,7 @@
                 gap: 15px;
             }
             
-            .image-container {
-                width: 90px;
-                top: 15px;
-                left: 8px;
-            }
+
             
             .hgu-container, .hgu6-container {
                 display: none;
@@ -429,11 +367,7 @@
                 gap: 10px;
             }
             
-            .image-container {
-                width: 80px;
-                top: 15px;
-                left: 20px;
-            }
+
             
             .hgu-container, .hgu6-container {
                 display: none;
@@ -553,11 +487,7 @@
                 gap: 8px;
             }
             
-            .image-container {
-                width: 70px;
-                top: 10px;
-                left: 15px;
-            }
+
             
             .container {
                 width: calc(100% - 6px);
@@ -630,11 +560,7 @@
         
         /* Ajustes para telas muito altas */
         @media (max-height: 600px) and (max-width: 768px) {
-            .image-container {
-                width: 70px;
-                top: 10px;
-                left: 18px;
-            }
+
             
             .main-container {
                 padding-top: 80px;
@@ -692,20 +618,9 @@
 </head>
 <body>
     <div class="main-container" id="mainContainer">
-        <!-- Logo no canto superior esquerdo -->
-        <div class="image-container">
-            <img src="images/logo.png" alt="Logo" />
-        </div>
+
         
-        <!-- Imagem HGU no canto esquerdo central -->
-        <div class="hgu-container">
-            <img src="images/hgu.png" alt="HGU" />
-        </div>
-        
-        <!-- Imagem HGU6 no canto direito central -->
-        <div class="hgu6-container">
-            <img src="images/hgu6.png" alt="HGU6" />
-        </div>
+
         
         <!-- Container do formulário centralizado -->
         <div class="container" id="containerElement">
@@ -906,21 +821,19 @@
             {"TECNOLOGIA": "ATA", "FABRICANTE": "KHOMP", "TIPO": "VOZ", "MODELO": "KAP302 2P", "FIRMWARE": "V5.2(202304261155) - preferred"},
             {"TECNOLOGIA": "ATA", "FABRICANTE": "AUDIOCODES", "TIPO": "VOZ", "MODELO": "MP202 2P", "FIRMWARE": "MP202_4_4_9_build_156 - preferred"},
             {"TECNOLOGIA": "ATA", "FABRICANTE": "AUDIOCODES", "TIPO": "VOZ", "MODELO": "MP204 4P", "FIRMWARE": "MP20x_4_4_9_build_156 - preferred"},
-            {"TECNOLOGIA": "STB", "FABRICANTE": "BLUECASTEL", "TIPO": "TV", "MODELO": "HP4500", "FIRMWARE": "MW02.02.19 - preferred"},
-            {"TECNOLOGIA": "STB", "FABRICANTE": "BLUECASTEL", "TIPO": "TV-WIFI", "MODELO": "HP4501", "FIRMWARE": "MW02.02.20 - preferred"},
-            {"TECNOLOGIA": "STB", "FABRICANTE": "BLUECASTEL", "TIPO": "TV", "MODELO": "HP4569", "FIRMWARE": "MW02.02.19 - preferred"},
-            {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS", "TIPO": "TV", "MODELO": "VIP4242H", "FIRMWARE": "MW02.02.19 - preferred"},
+            {"TECNOLOGIA": "STB", "FABRICANTE": "BLU-CASTEL", "TIPO": "TV", "MODELO": "HP4500", "FIRMWARE": "MW02.02.19 - preferred"},
+            {"TECNOLOGIA": "STB", "FABRICANTE": "BLU-CASTEL", "TIPO": "TV-WIFI", "MODELO": "HP4501", "FIRMWARE": "MW02.02.20 - preferred"},
+            {"TECNOLOGIA": "STB", "FABRICANTE": "BLU-CASTEL", "TIPO": "TV", "MODELO": "HP4569", "FIRMWARE": "MW02.02.19 - preferred"},
+            {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS", "TIPO": "TV-ETH", "MODELO": "VIP4242H", "FIRMWARE": "MW02.02.19 - preferred"},
             {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS", "TIPO": "TV", "MODELO": "VIP4242W", "FIRMWARE": "MW02.02.19 - preferred"},
-            {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS", "TIPO": "TV", "MODELO": "VIP4342W", "FIRMWARE": "MW02.02.19 - preferred"},
+            {"TECNOLOGIA": "STB", "FABRICANTE": "COMMSCOPE", "TIPO": "TV-WIFI", "MODELO": "VIP4342W", "FIRMWARE": "MW02.02.19 - preferred"},
             {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS", "TIPO": "TV", "MODELO": "VIP5242W", "FIRMWARE": "MW02.02.19 - preferred"},
-            {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS", "TIPO": "TV", "MODELO": "VIP5262", "FIRMWARE": "MW02.02.19 - preferred"},
+            {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS", "TIPO": "TV-ETH", "MODELO": "VIP5262", "FIRMWARE": "MW02.02.19 - preferred"},
             {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS", "TIPO": "TV", "MODELO": "VIP5342", "FIRMWARE": "MW02.02.19 - preferred"},
             {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS", "TIPO": "TV", "MODELO": "VIP5342W", "FIRMWARE": "MW02.02.19 - preferred"},
-            {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS", "TIPO": "TV", "MODELO": "VIP4342", "FIRMWARE": "MW02.02.19 - preferred"},
+            {"TECNOLOGIA": "STB", "FABRICANTE": "COMMSCOPE", "TIPO": "TV-ETH", "MODELO": "VIP4342", "FIRMWARE": "MW02.02.19 - preferred"},
             {"TECNOLOGIA": "STB", "FABRICANTE": "HUMAX", "TIPO": "TV", "MODELO": "PTT100W", "FIRMWARE": "MW02.02.19 - preferred"},
-            {"TECNOLOGIA": "STB", "FABRICANTE": "HUMAX", "TIPO": "TV", "MODELO": "PTT1000W", "FIRMWARE": "MW02.02.19 - preferred"},
             {"TECNOLOGIA": "STB", "FABRICANTE": "HUMAX", "TIPO": "TV", "MODELO": "PTT100", "FIRMWARE": "MW02.02.19 - preferred"},
-            {"TECNOLOGIA": "STB", "FABRICANTE": "HUMAX", "TIPO": "TV", "MODELO": "PTT1000", "FIRMWARE": "MW02.02.19 - preferred"},
             {"TECNOLOGIA": "STB", "FABRICANTE": "VANTIVA", "TIPO": "TV", "MODELO": "VIP5642W", "FIRMWARE": "MW02.02.19 - preferred"}
           ];
           
