@@ -1,47 +1,319 @@
 [
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2541GNAC-N1", "FIRMWARE": "BR_g7.7_100VNZ0b41 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2541GNAC-N2", "FIRMWARE": "BR_g7.7_100VNZ0b41 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2731GN2A4P", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2731GN2A4P-N2", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2741GNAC-N1", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2741GNAC-N2", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2741GNAC-N2 -SV", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 5", "MODELO": "GPT-2741GNAC-SV", "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 6", "MODELO": "GPT-2742GX4X5v6", "FIRMWARE": "GL_g1.13_100XNT0b17_2_1 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "MITRASTAR", "TIPO": "WI-FI 6", "MODELO": "GPT-2742GX4X5v6-SV", "FIRMWARE": "GL_g1.13_100XNT0b17_2_1 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF3505VW-N1", "FIRMWARE": "BR_SV_g000_R3505VWN1001_s42 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF3505VW-N2", "FIRMWARE": "BR_SV_g000_R3505VWN1001_s42 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF3507VW-N1", "FIRMWARE": "BR_SV_g000_R3507VWN1001_s42 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF3507VW-N2", "FIRMWARE": "BR_SV_g000_R3507VWN1001_s42 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF8115VW", "FIRMWARE": "BR_SV_g13.12_RTF_TEF001_V8.33_V022 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF8115VW-SV", "FIRMWARE": "BR_SV_g13.12_RTF_TEF001_V8.33_V022 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 5", "MODELO": "RTF8117VW", "FIRMWARE": "BR_SV_g13.12_RTF_TEF001_V8.33_V022 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 6", "MODELO": "RTF8225VW", "FIRMWARE": "BR_SV_g1.16_RTF_TEF004_V2.52 - preferred"},
-    {"TECNOLOGIA": "HGU", "FABRICANTE": "ASKEY", "TIPO": "WI-FI 6", "MODELO": "RTF8225VW-SV", "FIRMWARE": "BR_SV_g1.16_RTF_TEF004_V2.52 - preferred"},
-    {"TECNOLOGIA": "BASEPORT", "FABRICANTE": "ASKEY", "TIPO": "WIFI 5", "MODELO": "RG3110W", "FIRMWARE": "GL_g8.8_RG3110W0.6.9 - preferred"},
-    {"TECNOLOGIA": "BASEPORT", "FABRICANTE": "MITRA", "TIPO": "WIFI 6", "MODELO": "HGW-500IX4X4-Mv3", "FIRMWARE": "GL_g1.11_100XPD0b12 - preferred"},
-    {"TECNOLOGIA": "BASEPORT", "FABRICANTE": "MITRA", "TIPO": "WIFI 5", "MODELO": "HGW-500SN2A4-Qv3", "FIRMWARE": "GL_g8.6_100WZA0b26 - preferred"},
-    {"TECNOLOGIA": "ATA", "FABRICANTE": "INTELBRAS", "TIPO": "VOZ", "MODELO": "ATA200 2P", "FIRMWARE": "74.19.50.01 2022-09-22 16:11:26 - preferred"},
-    {"TECNOLOGIA": "ATA", "FABRICANTE": "INTELBRAS", "TIPO": "VOZ", "MODELO": "ATA400 4P", "FIRMWARE": "74.19.50.01 2022-09-22 16:11:26 - preferred"},
-    {"TECNOLOGIA": "ATA", "FABRICANTE": "GRANDSTREAM", "TIPO": "VOZ", "MODELO": "HT812 2P (OUI 000B82) ", "FIRMWARE": "1.0.57.1 - preferred"},
-    {"TECNOLOGIA": "ATA", "FABRICANTE": "GRANDSTREAM", "TIPO": "VOZ", "MODELO": "HT814 4P (OUI 000B82)", "FIRMWARE": "1.0.57.1 - preferred"},
-    {"TECNOLOGIA": "ATA", "FABRICANTE": "GRANDSTREAM", "TIPO": "VOZ", "MODELO": "HT818 8P (OUI 000B82)", "FIRMWARE": "1.0.57.1 - preferred"},
-    {"TECNOLOGIA": "ATA", "FABRICANTE": "KHOMP", "TIPO": "VOZ", "MODELO": "KAP302 2P", "FIRMWARE": "V5.2(202304261155) - preferred"},
-    {"TECNOLOGIA": "ATA", "FABRICANTE": "AUDIOCODES", "TIPO": "VOZ", "MODELO": "MP202 2P", "FIRMWARE": "MP202_4_4_9_build_156 - preferred"},
-    {"TECNOLOGIA": "ATA", "FABRICANTE": "AUDIOCODES", "TIPO": "VOZ", "MODELO": "MP204 4P", "FIRMWARE": "MP20x_4_4_9_build_156 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "BLU-CASTEL","TIPO": "TV-ETH", "MODELO": "HP4500", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "BLU-CASTEL","TIPO": "TV-WIFI", "MODELO": "HP4501", "FIRMWARE": "MW02.02.20 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "BLU-CASTEL","TIPO": "TV-ETH", "MODELO": "HP4569", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS","TIPO": "TV-ETH", "MODELO": "VIP4242H", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS","TIPO": "TV-WIFI", "MODELO": "VIP4242W", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "COMMSCOPE","TIPO": "TV-WIFI", "MODELO": "VIP4342W", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS","TIPO": "TV-WIFI", "MODELO": "VIP5242W", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS","TIPO": "TV-ETH", "MODELO": "VIP5262", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS","TIPO": "TV-ETH", "MODELO": "VIP5342", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "ARRIS","TIPO": "TV-WIFI", "MODELO": "VIP5342W", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "COMMSCOPE","TIPO": "TV-ETH", "MODELO": "VIP4342", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "HUMAX","TIPO": "TV-WIFI", "MODELO": "PTT100W", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "HUMAX","TIPO": "TV-ETH", "MODELO": "PTT100", "FIRMWARE": "MW02.02.19 - preferred"},
-    {"TECNOLOGIA": "STB", "FABRICANTE": "VANTIVA","TIPO": "TV-WIFI", "MODELO": "VIP5642W", "FIRMWARE": "MW02.02.19 - preferred"}
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "MITRASTAR",
+    "TIPO": "WI-FI 5",
+    "MODELO": "GPT-2541GNAC-N1",
+    "FIRMWARE": "BR_g7.7_100VNZ0b41 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "MITRASTAR",
+    "TIPO": "WI-FI 5",
+    "MODELO": "GPT-2541GNAC-N2",
+    "FIRMWARE": "BR_g7.7_100VNZ0b41 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "MITRASTAR",
+    "TIPO": "WI-FI 5",
+    "MODELO": "GPT-2731GN2A4P",
+    "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "MITRASTAR",
+    "TIPO": "WI-FI 5",
+    "MODELO": "GPT-2731GN2A4P-N2",
+    "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "MITRASTAR",
+    "TIPO": "WI-FI 5",
+    "MODELO": "GPT-2741GNAC-N1",
+    "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "MITRASTAR",
+    "TIPO": "WI-FI 5",
+    "MODELO": "GPT-2741GNAC-N2",
+    "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "MITRASTAR",
+    "TIPO": "WI-FI 5",
+    "MODELO": "GPT-2741GNAC-N2 -SV",
+    "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "MITRASTAR",
+    "TIPO": "WI-FI 5",
+    "MODELO": "GPT-2741GNAC-SV",
+    "FIRMWARE": "BR_g8.7_1.11WVK_0_b45 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "MITRASTAR",
+    "TIPO": "WI-FI 6",
+    "MODELO": "GPT-2742GX4X5v6",
+    "FIRMWARE": "GL_g2.5_100XNT0b23_1 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "MITRASTAR",
+    "TIPO": "WI-FI 6",
+    "MODELO": "GPT-2742GX4X5v6-SV",
+    "FIRMWARE": "GL_g2.5_100XNT0b23_1 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WI-FI 5",
+    "MODELO": "RTF3505VW-N1",
+    "FIRMWARE": "BR_SV_g000_R3505VWN1001_s42 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WI-FI 5",
+    "MODELO": "RTF3505VW-N2",
+    "FIRMWARE": "BR_SV_g000_R3505VWN1001_s42 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WI-FI 5",
+    "MODELO": "RTF3507VW-N1",
+    "FIRMWARE": "BR_SV_g000_R3507VWN1001_s42 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WI-FI 5",
+    "MODELO": "RTF3507VW-N2",
+    "FIRMWARE": "BR_SV_g000_R3507VWN1001_s42 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WI-FI 5",
+    "MODELO": "RTF8115VW",
+    "FIRMWARE": "BR_SV_g13.12_RTF_TEF001_V8.33_V022 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WI-FI 5",
+    "MODELO": "RTF8115VW-SV",
+    "FIRMWARE": "BR_SV_g13.12_RTF_TEF001_V8.33_V022 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WI-FI 5",
+    "MODELO": "RTF8117VW",
+    "FIRMWARE": "BR_SV_g13.12_RTF_TEF001_V8.33_V022 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WI-FI 6",
+    "MODELO": "RTF8225VW",
+    "FIRMWARE": "BR_SV_g1.16_RTF_TEF004_V2.52 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WI-FI 6",
+    "MODELO": "RTF8225VW-SV",
+    "FIRMWARE": "BR_SV_g1.16_RTF_TEF004_V2.52 - preferred"
+  },
+  {
+    "TECNOLOGIA": "HGU",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WI-FI 7",
+    "MODELO": "RTF8316VW",
+    "FIRMWARE": "GL_g1.7_R8316_V2.7-preferred - preferred"
+  },
+  {
+    "TECNOLOGIA": "BASEPORT",
+    "FABRICANTE": "ASKEY",
+    "TIPO": "WIFI 5",
+    "MODELO": "RG3110W",
+    "FIRMWARE": "GL_g8.8_RG3110W0.6.9 - preferred"
+  },
+  {
+    "TECNOLOGIA": "BASEPORT",
+    "FABRICANTE": "MITRA",
+    "TIPO": "WIFI 6",
+    "MODELO": "HGW-500IX4X4-Mv3",
+    "FIRMWARE": "GL_g1.11_100XPD0b12 - preferred"
+  },
+  {
+    "TECNOLOGIA": "BASEPORT",
+    "FABRICANTE": "MITRA",
+    "TIPO": "WIFI 5",
+    "MODELO": "HGW-500SN2A4-Qv3",
+    "FIRMWARE": "GL_g8.6_100WZA0b26 - preferred"
+  },
+  {
+    "TECNOLOGIA": "ATA",
+    "FABRICANTE": "INTELBRAS",
+    "TIPO": "VOZ",
+    "MODELO": "ATA200 2P",
+    "FIRMWARE": "74.19.50.01 2022-09-22 16:11:26 - preferred"
+  },
+  {
+    "TECNOLOGIA": "ATA",
+    "FABRICANTE": "INTELBRAS",
+    "TIPO": "VOZ",
+    "MODELO": "ATA400 4P",
+    "FIRMWARE": "74.19.50.01 2022-09-22 16:11:26 - preferred"
+  },
+  {
+    "TECNOLOGIA": "ATA",
+    "FABRICANTE": "GRANDSTREAM",
+    "TIPO": "VOZ",
+    "MODELO": "HT812 2P (OUI 000B82) ",
+    "FIRMWARE": "1.0.57.1 - preferred"
+  },
+  {
+    "TECNOLOGIA": "ATA",
+    "FABRICANTE": "GRANDSTREAM",
+    "TIPO": "VOZ",
+    "MODELO": "HT814 4P (OUI 000B82)",
+    "FIRMWARE": "1.0.57.1 - preferred"
+  },
+  {
+    "TECNOLOGIA": "ATA",
+    "FABRICANTE": "GRANDSTREAM",
+    "TIPO": "VOZ",
+    "MODELO": "HT818 8P (OUI 000B82)",
+    "FIRMWARE": "1.0.57.1 - preferred"
+  },
+  {
+    "TECNOLOGIA": "ATA",
+    "FABRICANTE": "KHOMP",
+    "TIPO": "VOZ",
+    "MODELO": "KAP302 2P",
+    "FIRMWARE": "V5.2(202304261155) - preferred"
+  },
+  {
+    "TECNOLOGIA": "ATA",
+    "FABRICANTE": "AUDIOCODES",
+    "TIPO": "VOZ",
+    "MODELO": "MP202 2P",
+    "FIRMWARE": "MP202_4_4_9_build_156 - preferred"
+  },
+  {
+    "TECNOLOGIA": "ATA",
+    "FABRICANTE": "AUDIOCODES",
+    "TIPO": "VOZ",
+    "MODELO": "MP204 4P",
+    "FIRMWARE": "MP20x_4_4_9_build_156 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "BLU-CASTEL",
+    "TIPO": "TV-ETH",
+    "MODELO": "HP4500",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "BLU-CASTEL",
+    "TIPO": "TV-WIFI",
+    "MODELO": "HP4501",
+    "FIRMWARE": "MW02.02.20 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "BLU-CASTEL",
+    "TIPO": "TV-ETH",
+    "MODELO": "HP4569",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "ARRIS",
+    "TIPO": "TV-ETH",
+    "MODELO": "VIP4242H",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "ARRIS",
+    "TIPO": "TV-WIFI",
+    "MODELO": "VIP4242W",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "COMMSCOPE",
+    "TIPO": "TV-WIFI",
+    "MODELO": "VIP4342W",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "ARRIS",
+    "TIPO": "TV-WIFI",
+    "MODELO": "VIP5242W",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "ARRIS",
+    "TIPO": "TV-ETH",
+    "MODELO": "VIP5262",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "ARRIS",
+    "TIPO": "TV-ETH",
+    "MODELO": "VIP5342",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "ARRIS",
+    "TIPO": "TV-WIFI",
+    "MODELO": "VIP5342W",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "COMMSCOPE",
+    "TIPO": "TV-ETH",
+    "MODELO": "VIP4342",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "HUMAX",
+    "TIPO": "TV-WIFI",
+    "MODELO": "PTT100W",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "HUMAX",
+    "TIPO": "TV-ETH",
+    "MODELO": "PTT100",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  },
+  {
+    "TECNOLOGIA": "STB",
+    "FABRICANTE": "VANTIVA",
+    "TIPO": "TV-WIFI",
+    "MODELO": "VIP5642W",
+    "FIRMWARE": "MW02.02.19 - preferred"
+  }
 ]
+
 
