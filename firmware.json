@@ -137,7 +137,7 @@
     "FABRICANTE": "ASKEY",
     "TIPO": "WI-FI 7",
     "MODELO": "RTF8316VW",
-    "FIRMWARE": "GL_g1.7_R8316_V2.7-preferred - preferred"
+    "FIRMWARE": "GL_g1.7_R8316_V2.7 - preferred"
   },
   {
     "TECNOLOGIA": "BASEPORT",
@@ -315,5 +315,6 @@
     "FIRMWARE": "MW02.02.19 - preferred"
   }
 ]
+
 
 
