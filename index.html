@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -717,7 +717,7 @@
           ...new Set(
             data
               .filter((d) => d.TECNOLOGIA === tecnologia)
-              .map((d) => d.FABRICANTE)
+              .map((d) => d.FABRICANTE),
           ),
         ];
         populateSelect(manufacturerSelect, fabricantes);
@@ -738,9 +738,9 @@
             data
               .filter(
                 (d) =>
-                  d.TECNOLOGIA === tecnologia && d.FABRICANTE === fabricante
+                  d.TECNOLOGIA === tecnologia && d.FABRICANTE === fabricante,
               )
-              .map((d) => d.TIPO)
+              .map((d) => d.TIPO),
           ),
         ];
         populateSelect(typeSelect, tipos);
@@ -762,9 +762,9 @@
                 (d) =>
                   d.TECNOLOGIA === tecnologia &&
                   d.FABRICANTE === fabricante &&
-                  d.TIPO === tipo
+                  d.TIPO === tipo,
               )
-              .map((d) => d.MODELO)
+              .map((d) => d.MODELO),
           ),
         ];
         populateSelect(modelSelect, modelos);
@@ -785,7 +785,7 @@
               d.FABRICANTE === fabricante &&
               d.TIPO === tipo &&
               d.TECNOLOGIA === tecnologia &&
-              d.MODELO === modelo
+              d.MODELO === modelo,
           );
 
           if (found) {
@@ -845,84 +845,84 @@
             FABRICANTE: "MITRASTAR",
             TIPO: "WI-FI 5",
             MODELO: "GPT-2731GN2A4P",
-            FIRMWARE: "BR_g8.7_1.11WVK_0_b45 - preferred",
+            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "MITRASTAR",
             TIPO: "WI-FI 5",
             MODELO: "GPT-2731GN2A4P-N2",
-            FIRMWARE: "BR_g8.7_1.11WVK_0_b45 - preferred",
+            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "MITRASTAR",
             TIPO: "WI-FI 5",
             MODELO: "GPT-2741GNAC-N1",
-            FIRMWARE: "BR_g8.7_1.11WVK_0_b45 - preferred",
+            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "MITRASTAR",
             TIPO: "WI-FI 5",
             MODELO: "GPT-2741GNAC-N2",
-            FIRMWARE: "BR_g8.7_1.11WVK_0_b45 - preferred",
+            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "MITRASTAR",
             TIPO: "WI-FI 5",
             MODELO: "GPT-2741GNAC-N2 -SV",
-            FIRMWARE: "BR_g8.7_1.11WVK_0_b45 - preferred",
+            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "MITRASTAR",
             TIPO: "WI-FI 5",
             MODELO: "GPT-2741GNAC-SV",
-            FIRMWARE: "BR_g8.7_1.11WVK_0_b45 - preferred",
+            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "MITRASTAR",
             TIPO: "WI-FI 6",
             MODELO: "GPT-2742GX4X5v6",
-            FIRMWARE: "GL_g2.5_100XNT0b23_1 - preferred",
+            FIRMWARE: "GL_g2.5_100XNT0b23_3 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "MITRASTAR",
             TIPO: "WI-FI 6",
             MODELO: "GPT-2742GX4X5v6-SV",
-            FIRMWARE: "GL_g2.5_100XNT0b23_1 - preferred",
+            FIRMWARE: "GL_g2.5_100XNT0b23_3 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "ASKEY",
             TIPO: "WI-FI 5",
             MODELO: "RTF3505VW-N1",
-            FIRMWARE: "BR_SV_g000_R3505VWN1001_s42 - preferred",
+            FIRMWARE: "BR_SV_g000_R3505VWN1001_s44 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "ASKEY",
             TIPO: "WI-FI 5",
             MODELO: "RTF3505VW-N2",
-            FIRMWARE: "BR_SV_g000_R3505VWN1001_s42 - preferred",
+            FIRMWARE: "BR_SV_g000_R3505VWN1001_s44 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "ASKEY",
             TIPO: "WI-FI 5",
             MODELO: "RTF3507VW-N1",
-            FIRMWARE: "BR_SV_g000_R3507VWN1001_s42 - preferred",
+            FIRMWARE: "BR_SV_g000_R3505VWN1001_s44 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "ASKEY",
             TIPO: "WI-FI 5",
             MODELO: "RTF3507VW-N2",
-            FIRMWARE: "BR_SV_g000_R3507VWN1001_s42 - preferred",
+            FIRMWARE: "BR_SV_g000_R3505VWN1001_s44 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
@@ -950,21 +950,28 @@
             FABRICANTE: "ASKEY",
             TIPO: "WI-FI 6",
             MODELO: "RTF8225VW",
-            FIRMWARE: "BR_SV_g1.16_RTF_TEF004_V2.52 - preferred",
+            FIRMWARE: "BR_SV_g2.5_RTF_TEF004_V3.9 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "ASKEY",
             TIPO: "WI-FI 6",
             MODELO: "RTF8225VW-SV",
-            FIRMWARE: "BR_SV_g1.16_RTF_TEF004_V2.52 - preferred",
+            FIRMWARE: "BR_SV_g2.5_RTF_TEF004_V3.9 - preferred",
           },
           {
             TECNOLOGIA: "HGU",
             FABRICANTE: "ASKEY",
             TIPO: "WI-FI 7",
             MODELO: "RTF8316VW",
-            FIRMWARE: "GL_g1.7_R8316_V2.7 - preferred",
+            FIRMWARE: "GL_g1.10_R8316_V2.13 - preferred",
+          },
+          {
+            TECNOLOGIA: "HGU",
+            FABRICANTE: "ASKEY",
+            TIPO: "WI-FI 7",
+            MODELO: "RTF8316VW-SX",
+            FIRMWARE: "GL_g1.10_R8316_V2.13 - preferred",
           },
           {
             TECNOLOGIA: "BASEPORT",
@@ -1150,4 +1157,3 @@
     </script>
   </body>
 </html>
-
