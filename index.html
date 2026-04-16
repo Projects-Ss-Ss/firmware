@@ -2,1158 +2,850 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAACAAACAAAAAgIAAgAAAAIAAgACAgAAAwMDAAICAgAAAAP8AAP8AAAD//wD/AAAA/wD/AP//AAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAA=="
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Firmware Finder</title>
+    <title>Firmware Finder - Gestão NT</title>
+    <link rel="icon" type="image/png" href="icons/nt.png" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
-      * {
-        box-sizing: border-box;
+      :root {
+        --purple: #660099;
+        --purple-dark: #4a006f;
+        --purple-light: #8b3fc0;
+        --purple-bg: #f5f0fa;
+        --purple-bg2: #ede4f5;
+        --text: #1a1a2e;
+        --text-mid: #555;
+        --text-light: #999;
+        --border: #e8e8e8;
+        --bg: #f4f3f7;
+        --white: #fff;
+        --surface: #fafafa;
+        --success: #00a651;
+        --success-bg: #d1fae5;
+        --danger: #c62828;
+        --danger-bg: #ffebe9;
+        --radius: 16px;
+        --radius-sm: 12px;
+        --radius-xs: 8px;
+        --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
+        --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       }
-
-      body {
-        background-color: #6f42c1;
-        background: linear-gradient(135deg, #6f42c1 0%, #6f42c1 100%);
-        min-height: 100vh;
+      * {
         margin: 0;
-        padding: 10px;
-        font-family: Arial, sans-serif;
+        padding: 0;
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html {
+        height: 100%;
+      }
+      body {
+        min-height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
       }
 
-      /* Ajuste específico para quando há resultados */
-      body.has-result {
-        min-height: auto;
-        height: auto;
-      }
-
-      .main-container {
+      /* ========== HEADER ========== */
+      .header {
+        background: linear-gradient(
+          135deg,
+          var(--purple) 0%,
+          var(--purple-dark) 60%,
+          #3a0060 100%
+        );
+        padding: 0 16px;
+        height: 56px;
         display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        gap: 50px;
-        max-width: 1400px;
-        margin: 0 auto;
-        min-height: 100vh;
-        position: relative;
-        transition: all 0.3s ease;
-        padding: 20px 10px;
-      }
-
-      .main-container.has-result {
-        align-items: flex-start;
-        justify-content: flex-start;
-        padding: 20px 10px;
-        min-height: auto;
-      }
-
-      .container {
-        background-color: white;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        width: 450px;
-        height: auto;
-        max-height: none;
-        position: relative;
-        transition: all 0.3s ease;
-        margin: 0 auto;
-        overflow: visible;
-      }
-
-      .container.has-result {
-        width: 450px;
-        max-height: none;
-      }
-
-      .header-container {
-        display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: space-between;
-        margin-bottom: 15px;
-        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 16px rgba(102, 0, 153, 0.3);
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
         gap: 10px;
       }
-
-      .header-container h1 {
-        text-align: left;
-        flex: 1;
-        margin: 0;
-        padding-right: 10px;
-      }
-
-      .refresh-btn {
-        background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 6px;
-        cursor: pointer;
+      .header-icon {
+        width: 34px;
+        height: 34px;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 5px;
+        font-size: 15px;
+        color: #fff;
+      }
+      .header-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: -0.02em;
+      }
+      .header-home {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        border: none;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all var(--transition);
+      }
+      .header-home:active {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(0.92);
+      }
+
+      /* ========== PAGE ========== */
+      .page {
+        padding: 16px;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      /* ========== STEP INDICATOR ========== */
+      .steps {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        margin-bottom: 20px;
+        padding: 0 4px;
+      }
+      .step-dot {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--border);
+        color: var(--text-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 11px;
-        font-weight: bold;
-        transition: all 0.3s;
-        min-width: auto;
-        height: auto;
-        box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+        font-weight: 800;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+      }
+      .step-dot.active {
+        background: var(--purple);
+        color: #fff;
+        box-shadow: 0 0 0 4px rgba(102, 0, 153, 0.15);
+      }
+      .step-dot.done {
+        background: var(--success);
+        color: #fff;
+      }
+      .step-line {
+        flex: 1;
+        height: 3px;
+        background: var(--border);
+        border-radius: 2px;
+        transition: background 0.3s ease;
+      }
+      .step-line.done {
+        background: var(--success);
       }
 
-      .refresh-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+      /* ========== SELECT CARDS ========== */
+      .select-card {
+        background: var(--white);
+        border: 2px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        margin-bottom: 12px;
+        transition: all var(--transition);
+        position: relative;
       }
-
-      .refresh-btn:active {
-        transform: translateY(0);
+      .select-card.active {
+        border-color: var(--purple);
+        box-shadow: 0 0 0 4px rgba(102, 0, 153, 0.08);
       }
-
-      .refresh-btn svg {
-        transition: transform 0.3s;
-        width: 16px;
-        height: 16px;
+      .select-card.done {
+        border-color: var(--success);
+        background: #f8fdf9;
       }
-
-      .refresh-btn:hover svg {
-        transform: rotate(180deg);
+      .select-card.locked {
+        opacity: 0.45;
+        pointer-events: none;
       }
-
-      .form-group {
+      .select-card-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
         margin-bottom: 10px;
       }
-
-      .form-group label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: bold;
-        color: #333;
-        font-size: 13px;
-      }
-
-      .form-group select {
-        width: 100%;
-        padding: 10px 12px;
-        border: 2px solid #ddd;
-        border-radius: 6px;
-        font-size: 14px;
-        background-color: white;
-        transition: all 0.3s;
-        appearance: none;
-        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
-        background-repeat: no-repeat;
-        background-position: right 10px center;
-        background-size: 16px;
-        padding-right: 35px;
-      }
-
-      .form-group select:focus {
-        border-color: #6f42c1;
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.1);
-      }
-
-      .form-group select:disabled {
-        background-color: #f8f9fa;
-        cursor: not-allowed;
-        opacity: 0.6;
-      }
-
-      button[type="submit"] {
-        background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
-        color: white;
-        border: none;
-        padding: 12px 25px;
-        border-radius: 6px;
+      .select-card-num {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--purple-bg);
+        color: var(--purple);
         font-size: 11px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .select-card.done .select-card-num {
+        background: var(--success-bg);
+        color: var(--success);
+      }
+      .select-card-label {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-mid);
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+      .select-card-value {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--success);
+        margin-left: auto;
+      }
+      .select-native {
         width: 100%;
+        padding: 14px 16px;
+        font-size: 16px;
+        font-weight: 600;
+        font-family: inherit;
+        color: var(--text);
+        background: var(--surface);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius-xs);
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M1.5 5.5l6.5 6 6.5-6'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        background-size: 14px;
+        cursor: pointer;
+        transition: all var(--transition);
+      }
+      .select-native:focus {
+        outline: none;
+        border-color: var(--purple);
+        box-shadow: 0 0 0 4px rgba(102, 0, 153, 0.1);
+        background-color: var(--white);
+      }
+      .select-native:disabled {
+        background: #f5f5f5;
+        color: #ccc;
+        cursor: not-allowed;
+      }
+
+      /* ========== RESULT ========== */
+      .result-card {
+        background: var(--white);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+        margin-top: 8px;
+        animation: slideUp 0.4s ease;
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .result-header {
+        background: linear-gradient(
+          135deg,
+          var(--purple) 0%,
+          var(--purple-dark) 100%
+        );
+        padding: 18px 20px;
+        color: #fff;
+        text-align: center;
+      }
+      .result-header i {
+        font-size: 28px;
+        margin-bottom: 6px;
+        opacity: 0.8;
+      }
+      .result-header-title {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .result-details {
+        padding: 16px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .detail-chip {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xs);
+        padding: 10px 12px;
+      }
+      .detail-chip-label {
+        font-size: 9px;
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        color: var(--text-light);
+        margin-bottom: 2px;
+      }
+      .detail-chip-value {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text);
       }
 
-      button[type="submit"]:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(111, 66, 193, 0.3);
+      .firmware-result {
+        margin: 0 16px 16px;
+        background: linear-gradient(
+          135deg,
+          var(--purple-bg) 0%,
+          var(--purple-bg2) 100%
+        );
+        border: 2px solid var(--purple);
+        border-radius: var(--radius);
+        padding: 20px 16px;
+        text-align: center;
       }
-
-      button[type="submit"]:active {
-        transform: translateY(0);
+      .firmware-result-label {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--purple);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        margin-bottom: 8px;
       }
-
-      .result-container {
-        margin-top: 15px;
-        padding: 15px;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        border-radius: 8px;
-        border-left: 4px solid #6f42c1;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.5s ease;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        max-width: 100%;
-        box-sizing: border-box;
+      .firmware-result-label i {
+        font-size: 16px;
       }
-
-      .result-container.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .result-container p {
-        margin: 5px 0;
+      .firmware-result-value {
+        font-size: 17px;
+        font-weight: 800;
+        color: var(--purple-dark);
+        word-break: break-all;
         line-height: 1.4;
+      }
+
+      .firmware-error {
+        margin: 0 16px 16px;
+        background: var(--danger-bg);
+        border: 2px solid var(--danger);
+        border-radius: var(--radius);
+        padding: 20px 16px;
+        text-align: center;
+      }
+      .firmware-error i {
+        font-size: 28px;
+        color: var(--danger);
+        margin-bottom: 6px;
+      }
+      .firmware-error p {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--danger);
+      }
+
+      /* ========== EMPTY STATE ========== */
+      .empty-state {
+        text-align: center;
+        padding: 48px 20px;
+        color: var(--text-light);
+      }
+      .empty-state i {
+        font-size: 56px;
+        margin-bottom: 16px;
+        opacity: 0.2;
+      }
+      .empty-state p {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-mid);
+        margin-bottom: 4px;
+      }
+      .empty-state span {
         font-size: 13px;
       }
 
-      .result-container h3 {
-        margin: 10px 0 6px 0;
-        font-size: 15px;
+      /* ========== RESET BTN ========== */
+      .reset-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        padding: 15px;
+        margin-top: 16px;
+        background: none;
+        border: 2px solid var(--border);
+        border-radius: var(--radius);
+        font-size: 14px;
+        font-weight: 700;
+        font-family: inherit;
+        color: var(--text-mid);
+        cursor: pointer;
+        transition: all var(--transition);
+      }
+      .reset-btn:active {
+        background: var(--danger-bg);
+        border-color: var(--danger);
+        color: var(--danger);
+        transform: scale(0.98);
+      }
+      .reset-btn i {
+        font-size: 13px;
       }
 
-      .result-container h3:first-child {
-        margin-top: 0;
+      /* ========== COPY BTN ========== */
+      .copy-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        background: var(--purple);
+        border: none;
+        border-radius: var(--radius-xs);
+        font-size: 13px;
+        font-weight: 700;
+        font-family: inherit;
+        color: #fff;
+        cursor: pointer;
+        transition: all var(--transition);
+      }
+      .copy-btn:active {
+        background: var(--purple-dark);
+        transform: scale(0.97);
+      }
+      .copy-btn i {
+        font-size: 12px;
       }
 
-      .highlight {
-        color: #6f42c1;
-        font-weight: bold;
-        word-break: break-word;
-      }
-
-      .error {
-        color: #dc3545;
-        font-weight: bold;
-      }
-
-      h1 {
-        color: #6f42c1;
-        margin: 0;
-        font-size: 22px;
-        font-weight: bold;
-        line-height: 1.2;
-      }
-
-      h3 {
-        margin-top: 0;
-        color: #333;
-        font-size: 16px;
-        font-weight: bold;
-      }
-
-      /* Telas grandes */
-      @media (min-width: 1400px) {
-        .container {
-          width: 500px;
-          max-height: none;
-        }
-
-        .container.has-result {
-          width: 500px;
-          max-height: none;
-        }
-
-        .main-container {
-          gap: 60px;
-        }
-      }
-
-      /* Tablets */
-      @media (max-width: 1024px) {
-        .hgu-container,
-        .hgu6-container {
-          display: none;
-        }
-
-        .container {
-          width: 90%;
-          max-width: 400px;
-          max-height: none;
-        }
-
-        .container.has-result {
-          width: 90%;
-          max-width: 400px;
-          max-height: none;
-        }
-
-        .main-container {
-          gap: 30px;
-          padding: 15px 10px;
-        }
-      }
-
-      /* Mobile - Paisagem */
-      @media (max-width: 768px) and (orientation: landscape) {
-        .main-container {
-          padding: 10px 5px;
-          min-height: calc(100vh - 10px);
-          gap: 20px;
-        }
-
-        .main-container.has-result {
-          padding: 10px 5px;
-          padding-bottom: 20px;
-          min-height: auto;
-          gap: 15px;
-        }
-
-        .hgu-container,
-        .hgu6-container {
-          display: none;
-        }
-
-        .container {
-          width: 90%;
-          max-height: none;
-          padding: 15px;
-        }
-
-        .container.has-result {
-          width: 90%;
-          max-height: none;
-          margin-bottom: 15px;
-        }
-
-        h1 {
-          font-size: 20px;
-        }
-
-        .result-container {
-          padding: 15px;
-          font-size: 13px;
-          min-height: auto;
-        }
-
-        .result-container h3 {
-          font-size: 15px;
-        }
-      }
-
-      /* Mobile - Retrato */
-      @media (max-width: 768px) {
-        body {
-          padding: 5px;
-          min-height: 100vh;
-        }
-
-        .main-container {
-          flex-direction: column;
-          gap: 15px;
-          padding: 5px;
-          min-height: 100vh;
-          justify-content: flex-start;
-          align-items: center;
-          padding-top: 100px;
-        }
-
-        .main-container.has-result {
-          justify-content: flex-start;
-          align-items: center;
-          padding-top: 100px;
-          padding-bottom: 40px;
-          min-height: auto;
-          gap: 10px;
-        }
-
-        .hgu-container,
-        .hgu6-container {
-          display: none;
-        }
-
-        .container {
-          width: calc(100% - 10px);
-          max-height: none;
-          padding: 15px;
-          margin: 0;
-          position: static;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-          overflow: visible;
-        }
-
-        .container.has-result {
-          width: calc(100% - 10px);
-          max-height: none;
-          margin-bottom: 20px;
-        }
-
-        .header-container {
-          flex-direction: row;
-          align-items: flex-start;
-          gap: 10px;
-          margin-bottom: 20px;
-        }
-
-        .header-container h1 {
-          text-align: left;
-          width: auto;
-          flex: 1;
-          font-size: 18px;
-        }
-
-        h1 {
-          font-size: 18px;
-          text-align: left;
-          width: auto;
-        }
-
-        .refresh-btn {
-          align-self: flex-start;
-          width: auto;
-          min-width: auto;
-          height: auto;
-          font-size: 10px;
-          padding: 5px 10px;
-        }
-
-        .form-group {
-          margin-bottom: 12px;
-        }
-
-        .form-group label {
-          font-size: 13px;
-          margin-bottom: 5px;
-        }
-
-        .form-group select {
-          padding: 12px 14px;
-          font-size: 14px;
-          border-radius: 5px;
-        }
-
-        button[type="submit"] {
-          padding: 14px;
-          font-size: 14px;
-          border-radius: 5px;
-        }
-
-        .result-container {
-          margin-top: 12px;
-          padding: 12px;
-          font-size: 12px;
-          min-height: auto;
-          max-width: 100%;
-        }
-
-        .result-container h3 {
-          font-size: 14px;
-          margin: 8px 0 5px 0;
-        }
-
-        .result-container h3:first-child {
-          margin-top: 0;
-        }
-
-        .result-container p {
-          margin: 4px 0;
-          word-wrap: break-word;
-          overflow-wrap: break-word;
-        }
-      }
-
-      /* Mobile muito pequeno */
-      @media (max-width: 480px) {
-        body {
-          padding: 3px;
-          min-height: 100vh;
-        }
-
-        .main-container {
-          padding: 3px;
-          padding-top: 90px;
-          justify-content: flex-start;
-          align-items: center;
-          min-height: 100vh;
-        }
-
-        .main-container.has-result {
-          justify-content: flex-start;
-          align-items: center;
-          padding-top: 90px;
-          padding-bottom: 30px;
-          min-height: auto;
-          gap: 8px;
-        }
-
-        .container {
-          width: calc(100% - 6px);
-          max-height: none;
-          padding: 12px;
-          border-radius: 8px;
-          overflow: visible;
-        }
-
-        .container.has-result {
-          width: calc(100% - 6px);
-          max-height: none;
-          margin-bottom: 15px;
-        }
-
-        h1 {
-          font-size: 16px;
-        }
-
-        .form-group label {
-          font-size: 12px;
-        }
-
-        .form-group select {
-          padding: 10px;
-          font-size: 13px;
-        }
-
-        button[type="submit"] {
-          padding: 12px;
-          font-size: 13px;
-        }
-
-        .refresh-btn {
-          padding: 4px 8px;
-          font-size: 9px;
-          min-width: auto;
-          height: auto;
-        }
-
-        .refresh-btn svg {
-          width: 12px;
-          height: 12px;
-        }
-
-        .result-container {
-          padding: 10px;
-          font-size: 11px;
-          min-height: auto;
-          max-width: 100%;
-          margin-bottom: 10px;
-        }
-
-        .result-container h3 {
-          font-size: 12px;
-          margin: 6px 0 4px 0;
-        }
-
-        .result-container h3:first-child {
-          margin-top: 0;
-        }
-
-        .result-container p {
-          margin: 3px 0;
-          line-height: 1.3;
-          word-wrap: break-word;
-          overflow-wrap: break-word;
-        }
-      }
-
-      /* Ajustes para telas muito altas */
-      @media (max-height: 600px) and (max-width: 768px) {
-        .main-container {
-          padding-top: 80px;
-          min-height: 100vh;
-          justify-content: flex-start;
-          align-items: center;
-        }
-
-        .main-container.has-result {
-          justify-content: flex-start;
-          align-items: center;
-          padding-top: 80px;
-          padding-bottom: 25px;
-          min-height: auto;
-          gap: 5px;
-        }
-
-        .container {
-          width: 95%;
-          max-height: none;
-          padding: 12px;
-          overflow: visible;
-        }
-
-        .container.has-result {
-          width: 95%;
-          max-height: none;
-          margin-bottom: 10px;
-        }
-
-        .form-group {
-          margin-bottom: 10px;
-        }
-
-        .result-container {
-          padding: 8px;
-          margin-top: 10px;
-          min-height: auto;
-        }
-      }
-
-      /* Melhorias de toque para mobile */
-      @media (hover: none) and (pointer: coarse) {
-        .form-group select {
-          padding: 16px 15px;
-          font-size: 16px;
-        }
-
-        button[type="submit"] {
-          padding: 18px;
-          font-size: 17px;
-        }
+      /* ========== HIDE (utility) ========== */
+      .hidden {
+        display: none !important;
       }
     </style>
   </head>
   <body>
-    <div class="main-container" id="mainContainer">
-      <!-- Container do formulário centralizado -->
-      <div class="container" id="containerElement">
-        <div class="header-container">
-          <h1>Firmware Finder</h1>
-          <button type="button" id="refreshBtn" class="refresh-btn">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-            Limpar
-          </button>
-        </div>
-
-        <form id="firmwareForm">
-          <div class="form-group">
-            <label for="technology">Tecnologia:</label>
-            <select id="technology" name="technology" required>
-              <option value="">Selecione uma tecnologia</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="manufacturer">Fabricante:</label>
-            <select id="manufacturer" name="manufacturer" disabled required>
-              <option value="">Selecione um fabricante</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="type">Tipo:</label>
-            <select id="type" name="type" disabled required>
-              <option value="">Selecione um tipo</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="model">Modelo:</label>
-            <select id="model" name="model" disabled required>
-              <option value="">Selecione um modelo</option>
-            </select>
-          </div>
-
-          <button type="submit">Consultar Firmware</button>
-        </form>
-
-        <div id="result" class="result-container"></div>
+    <!-- ========== HEADER ========== -->
+    <header class="header">
+      <div class="header-left">
+        <div class="header-icon"><i class="fa-solid fa-microchip"></i></div>
+        <span class="header-title">Firmware Finder</span>
       </div>
+    </header>
+
+    <!-- ========== PAGE ========== -->
+    <div class="page">
+      <!-- Step Indicator -->
+      <div class="steps">
+        <div class="step-dot active" id="step1">1</div>
+        <div class="step-line" id="line1"></div>
+        <div class="step-dot" id="step2">2</div>
+        <div class="step-line" id="line2"></div>
+        <div class="step-dot" id="step3">3</div>
+        <div class="step-line" id="line3"></div>
+        <div class="step-dot" id="step4">4</div>
+      </div>
+
+      <!-- Select 1: Tecnologia -->
+      <div class="select-card active" id="card1">
+        <div class="select-card-header">
+          <div class="select-card-num">1</div>
+          <div class="select-card-label">Tecnologia</div>
+          <div class="select-card-value" id="val1"></div>
+        </div>
+        <select class="select-native" id="technology">
+          <option value="">Selecione a tecnologia</option>
+        </select>
+      </div>
+
+      <!-- Select 2: Fabricante -->
+      <div class="select-card locked" id="card2">
+        <div class="select-card-header">
+          <div class="select-card-num">2</div>
+          <div class="select-card-label">Fabricante</div>
+          <div class="select-card-value" id="val2"></div>
+        </div>
+        <select class="select-native" id="manufacturer" disabled>
+          <option value="">Selecione o fabricante</option>
+        </select>
+      </div>
+
+      <!-- Select 3: Tipo -->
+      <div class="select-card locked" id="card3">
+        <div class="select-card-header">
+          <div class="select-card-num">3</div>
+          <div class="select-card-label">Tipo</div>
+          <div class="select-card-value" id="val3"></div>
+        </div>
+        <select class="select-native" id="type" disabled>
+          <option value="">Selecione o tipo</option>
+        </select>
+      </div>
+
+      <!-- Select 4: Modelo -->
+      <div class="select-card locked" id="card4">
+        <div class="select-card-header">
+          <div class="select-card-num">4</div>
+          <div class="select-card-label">Modelo</div>
+          <div class="select-card-value" id="val4"></div>
+        </div>
+        <select class="select-native" id="model" disabled>
+          <option value="">Selecione o modelo</option>
+        </select>
+      </div>
+
+      <!-- Result Area -->
+      <div id="resultArea">
+        <div class="empty-state" id="emptyState">
+          <i class="fa-solid fa-microchip"></i>
+          <p>Consulte um firmware</p>
+          <span>Siga os passos acima para encontrar a versão homologada</span>
+        </div>
+      </div>
+
+      <!-- Reset -->
+      <button class="reset-btn" id="resetBtn">
+        <i class="fa-solid fa-rotate-right"></i> Limpar e recomeçar
+      </button>
     </div>
 
     <script>
       let data = [];
 
-      const manufacturerSelect = document.getElementById("manufacturer");
-      const typeSelect = document.getElementById("type");
-      const technologySelect = document.getElementById("technology");
-      const modelSelect = document.getElementById("model");
-      const result = document.getElementById("result");
-      const mainContainer = document.getElementById("mainContainer");
-      const containerElement = document.getElementById("containerElement");
-      const refreshBtn = document.getElementById("refreshBtn");
+      const $ = (id) => document.getElementById(id);
+      const technologySelect = $("technology");
+      const manufacturerSelect = $("manufacturer");
+      const typeSelect = $("type");
+      const modelSelect = $("model");
+      const resultArea = $("resultArea");
+      const emptyState = $("emptyState");
 
-      function populateSelect(select, options) {
-        select.innerHTML = '<option value="">Selecione</option>';
-        options.forEach((opt) => {
-          const option = document.createElement("option");
-          option.value = opt;
-          option.textContent = opt;
-          select.appendChild(option);
+      function escapeHTML(str) {
+        const d = document.createElement("div");
+        d.textContent = str;
+        return d.innerHTML;
+      }
+
+      function populateSelect(sel, opts, placeholder) {
+        sel.innerHTML = `<option value="">${placeholder}</option>`;
+        opts.sort().forEach((o) => {
+          const opt = document.createElement("option");
+          opt.value = o;
+          opt.textContent = o;
+          sel.appendChild(opt);
         });
-        select.disabled = false;
+        sel.disabled = false;
       }
 
-      function resetForm() {
+      function updateSteps(activeStep) {
+        for (let i = 1; i <= 4; i++) {
+          const dot = $("step" + i);
+          const card = $("card" + i);
+          dot.classList.remove("active", "done");
+          card.classList.remove("active", "done", "locked");
+          if (i < activeStep) {
+            dot.classList.add("done");
+            dot.innerHTML =
+              '<i class="fa-solid fa-check" style="font-size:11px"></i>';
+            card.classList.add("done");
+          } else if (i === activeStep) {
+            dot.classList.add("active");
+            dot.textContent = i;
+            card.classList.add("active");
+          } else {
+            dot.textContent = i;
+            card.classList.add("locked");
+          }
+          if (i < 4) {
+            const line = $("line" + i);
+            line.classList.toggle("done", i < activeStep);
+          }
+        }
+      }
+
+      function setValBadge(step, text) {
+        const el = $("val" + step);
+        el.textContent = text ? text : "";
+      }
+
+      function showResult(found, tec, fab, tip, mod) {
+        emptyState.classList.add("hidden");
+        const existing = resultArea.querySelector(".result-card");
+        if (existing) existing.remove();
+
+        const card = document.createElement("div");
+        card.className = "result-card";
+
+        if (found) {
+          card.innerHTML = `
+            <div class="result-header">
+                <i class="fa-solid fa-circle-check"></i>
+                <div class="result-header-title">Firmware Encontrado</div>
+            </div>
+            <div class="result-details">
+                <div class="detail-chip">
+                    <div class="detail-chip-label">Tecnologia</div>
+                    <div class="detail-chip-value">${escapeHTML(tec)}</div>
+                </div>
+                <div class="detail-chip">
+                    <div class="detail-chip-label">Fabricante</div>
+                    <div class="detail-chip-value">${escapeHTML(fab)}</div>
+                </div>
+                <div class="detail-chip">
+                    <div class="detail-chip-label">Tipo</div>
+                    <div class="detail-chip-value">${escapeHTML(tip)}</div>
+                </div>
+                <div class="detail-chip">
+                    <div class="detail-chip-label">Modelo</div>
+                    <div class="detail-chip-value">${escapeHTML(mod)}</div>
+                </div>
+            </div>
+            <div class="firmware-result">
+                <div class="firmware-result-label"><i class="fa-solid fa-microchip"></i> Firmware Homologado</div>
+                <div class="firmware-result-value" id="fwValue">${escapeHTML(found.FIRMWARE)}</div>
+            </div>
+            <div style="padding:0 16px 16px">
+                <button class="copy-btn" id="copyBtn"><i class="fa-regular fa-copy"></i> Copiar Firmware</button>
+            </div>`;
+        } else {
+          card.innerHTML = `
+            <div class="result-header" style="background:linear-gradient(135deg,var(--danger),#8b0000)">
+                <i class="fa-solid fa-circle-xmark"></i>
+                <div class="result-header-title">Não Encontrado</div>
+            </div>
+            <div class="result-details">
+                <div class="detail-chip">
+                    <div class="detail-chip-label">Tecnologia</div>
+                    <div class="detail-chip-value">${escapeHTML(tec)}</div>
+                </div>
+                <div class="detail-chip">
+                    <div class="detail-chip-label">Fabricante</div>
+                    <div class="detail-chip-value">${escapeHTML(fab)}</div>
+                </div>
+                <div class="detail-chip">
+                    <div class="detail-chip-label">Tipo</div>
+                    <div class="detail-chip-value">${escapeHTML(tip)}</div>
+                </div>
+                <div class="detail-chip">
+                    <div class="detail-chip-label">Modelo</div>
+                    <div class="detail-chip-value">${escapeHTML(mod)}</div>
+                </div>
+            </div>
+            <div class="firmware-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <p>Firmware não encontrado para esta combinação</p>
+            </div>`;
+        }
+        resultArea.appendChild(card);
+
+        // Scroll to result
+        setTimeout(
+          () => card.scrollIntoView({ behavior: "smooth", block: "nearest" }),
+          100,
+        );
+
+        // Copy button
+        const copyBtn = $("copyBtn");
+        if (copyBtn) {
+          copyBtn.addEventListener("click", () => {
+            const fw = $("fwValue").textContent;
+            navigator.clipboard.writeText(fw).then(() => {
+              copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copiado!';
+              setTimeout(() => {
+                copyBtn.innerHTML =
+                  '<i class="fa-regular fa-copy"></i> Copiar Firmware';
+              }, 2000);
+            });
+          });
+        }
+      }
+
+      function resetAll() {
         technologySelect.value = "";
-        manufacturerSelect.value = "";
-        typeSelect.value = "";
-        modelSelect.value = "";
+        manufacturerSelect.innerHTML =
+          '<option value="">Selecione o fabricante</option>';
         manufacturerSelect.disabled = true;
+        typeSelect.innerHTML = '<option value="">Selecione o tipo</option>';
         typeSelect.disabled = true;
+        modelSelect.innerHTML = '<option value="">Selecione o modelo</option>';
         modelSelect.disabled = true;
-        result.classList.remove("show");
-        result.textContent = "";
-        mainContainer.classList.remove("has-result");
-        containerElement.classList.remove("has-result");
-        document.body.classList.remove("has-result");
+        updateSteps(1);
+        setValBadge(1, "");
+        setValBadge(2, "");
+        setValBadge(3, "");
+        setValBadge(4, "");
+        emptyState.classList.remove("hidden");
+        const existing = resultArea.querySelector(".result-card");
+        if (existing) existing.remove();
       }
 
+      // Cascading
       technologySelect.addEventListener("change", () => {
-        const tecnologia = technologySelect.value;
-        if (!tecnologia) return resetForm();
-
-        const fabricantes = [
+        const tec = technologySelect.value;
+        if (!tec) return resetAll();
+        setValBadge(1, tec);
+        const fabs = [
           ...new Set(
-            data
-              .filter((d) => d.TECNOLOGIA === tecnologia)
-              .map((d) => d.FABRICANTE),
+            data.filter((d) => d.TECNOLOGIA === tec).map((d) => d.FABRICANTE),
           ),
         ];
-        populateSelect(manufacturerSelect, fabricantes);
-        typeSelect.innerHTML = '<option value="">Selecione um tipo</option>';
+        populateSelect(manufacturerSelect, fabs, "Selecione o fabricante");
+        typeSelect.innerHTML = '<option value="">Selecione o tipo</option>';
         typeSelect.disabled = true;
-        modelSelect.innerHTML = '<option value="">Selecione um modelo</option>';
+        modelSelect.innerHTML = '<option value="">Selecione o modelo</option>';
         modelSelect.disabled = true;
-        result.classList.remove("show");
+        setValBadge(2, "");
+        setValBadge(3, "");
+        setValBadge(4, "");
+        updateSteps(2);
+        emptyState.classList.remove("hidden");
+        const existing = resultArea.querySelector(".result-card");
+        if (existing) existing.remove();
       });
 
       manufacturerSelect.addEventListener("change", () => {
-        const tecnologia = technologySelect.value;
-        const fabricante = manufacturerSelect.value;
-        if (!tecnologia || !fabricante) return;
-
+        const tec = technologySelect.value;
+        const fab = manufacturerSelect.value;
+        if (!fab) {
+          typeSelect.innerHTML = '<option value="">Selecione o tipo</option>';
+          typeSelect.disabled = true;
+          modelSelect.innerHTML =
+            '<option value="">Selecione o modelo</option>';
+          modelSelect.disabled = true;
+          setValBadge(2, "");
+          setValBadge(3, "");
+          setValBadge(4, "");
+          updateSteps(2);
+          return;
+        }
+        setValBadge(2, fab);
         const tipos = [
           ...new Set(
             data
-              .filter(
-                (d) =>
-                  d.TECNOLOGIA === tecnologia && d.FABRICANTE === fabricante,
-              )
+              .filter((d) => d.TECNOLOGIA === tec && d.FABRICANTE === fab)
               .map((d) => d.TIPO),
           ),
         ];
-        populateSelect(typeSelect, tipos);
-        modelSelect.innerHTML = '<option value="">Selecione um modelo</option>';
+        populateSelect(typeSelect, tipos, "Selecione o tipo");
+        modelSelect.innerHTML = '<option value="">Selecione o modelo</option>';
         modelSelect.disabled = true;
-        result.classList.remove("show");
+        setValBadge(3, "");
+        setValBadge(4, "");
+        updateSteps(3);
+        emptyState.classList.remove("hidden");
+        const existing = resultArea.querySelector(".result-card");
+        if (existing) existing.remove();
       });
 
       typeSelect.addEventListener("change", () => {
-        const tecnologia = technologySelect.value;
-        const fabricante = manufacturerSelect.value;
-        const tipo = typeSelect.value;
-        if (!tecnologia || !fabricante || !tipo) return;
-
+        const tec = technologySelect.value;
+        const fab = manufacturerSelect.value;
+        const tip = typeSelect.value;
+        if (!tip) {
+          modelSelect.innerHTML =
+            '<option value="">Selecione o modelo</option>';
+          modelSelect.disabled = true;
+          setValBadge(3, "");
+          setValBadge(4, "");
+          updateSteps(3);
+          return;
+        }
+        setValBadge(3, tip);
         const modelos = [
           ...new Set(
             data
               .filter(
                 (d) =>
-                  d.TECNOLOGIA === tecnologia &&
-                  d.FABRICANTE === fabricante &&
-                  d.TIPO === tipo,
+                  d.TECNOLOGIA === tec &&
+                  d.FABRICANTE === fab &&
+                  d.TIPO === tip,
               )
               .map((d) => d.MODELO),
           ),
         ];
-        populateSelect(modelSelect, modelos);
-        result.classList.remove("show");
+        populateSelect(modelSelect, modelos, "Selecione o modelo");
+        setValBadge(4, "");
+        updateSteps(4);
+        emptyState.classList.remove("hidden");
+        const existing = resultArea.querySelector(".result-card");
+        if (existing) existing.remove();
       });
 
-      document
-        .getElementById("firmwareForm")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-          const fabricante = manufacturerSelect.value;
-          const tipo = typeSelect.value;
-          const tecnologia = technologySelect.value;
-          const modelo = modelSelect.value;
+      modelSelect.addEventListener("change", () => {
+        const tec = technologySelect.value;
+        const fab = manufacturerSelect.value;
+        const tip = typeSelect.value;
+        const mod = modelSelect.value;
+        if (!mod) {
+          setValBadge(4, "");
+          return;
+        }
+        setValBadge(4, mod);
+        const found = data.find(
+          (d) =>
+            d.TECNOLOGIA === tec &&
+            d.FABRICANTE === fab &&
+            d.TIPO === tip &&
+            d.MODELO === mod,
+        );
+        showResult(found, tec, fab, tip, mod);
+      });
 
-          const found = data.find(
-            (d) =>
-              d.FABRICANTE === fabricante &&
-              d.TIPO === tipo &&
-              d.TECNOLOGIA === tecnologia &&
-              d.MODELO === modelo,
+      $("resetBtn").addEventListener("click", resetAll);
+
+      // Init — carrega dados do firmware.json
+      fetch("firmware.json")
+        .then((res) => res.json())
+        .then((json) => {
+          data = json;
+          const tecnologias = [...new Set(data.map((d) => d.TECNOLOGIA))];
+          populateSelect(
+            technologySelect,
+            tecnologias,
+            "Selecione a tecnologia",
           );
-
-          if (found) {
-            result.innerHTML = `
-              <h3 style="text-align: left; color: #6f42c1;">CONSULTA REALIZADA</h3>
-              <hr style="border: none; border-top: 1px solid #ddd; margin: 10px 0;">
-              <p style="text-align: left;"><strong style="display: inline-block; min-width: 40px;">Tecnologia:</strong> ${tecnologia}</p>
-              <p style="text-align: left;"><strong style="display: inline-block; min-width: 40px;">Fabricante:</strong> ${fabricante}</p>
-              <p style="text-align: left;"><strong style="display: inline-block; min-width: 40px;">Tipo:</strong> ${tipo}</p>
-              <p style="text-align: left;"><strong style="display: inline-block; min-width: 40px;">Modelo:</strong> ${modelo}</p>
-              <h3 style="text-align: left;">Firmware encontrado:</h3>
-              <p style="text-align: left;"><span class="highlight">${found.FIRMWARE}</span></p>
-            `;
-            result.classList.add("show");
-            mainContainer.classList.add("has-result");
-            containerElement.classList.add("has-result");
-            document.body.classList.add("has-result");
-          } else {
-            result.innerHTML = `
-              <h3 style="text-align: left; color: #6f42c1;">CONSULTA REALIZADA</h3>
-              <hr style="border: none; border-top: 1px solid #ddd; margin: 10px 0;">
-              <p style="text-align: left;"><strong style="display: inline-block; min-width: 40px;">Tecnologia:</strong> ${tecnologia}</p>
-              <p style="text-align: left;"><strong style="display: inline-block; min-width: 40px;">Fabricante:</strong> ${fabricante}</p>
-              <p style="text-align: left;"><strong style="display: inline-block; min-width: 40px;">Tipo:</strong> ${tipo}</p>
-              <p style="text-align: left;"><strong style="display: inline-block; min-width: 40px;">Modelo:</strong> ${modelo}</p>
-              <p class="error" style="text-align: left;">Firmware não encontrado.</p>
-            `;
-            result.classList.add("show");
-            mainContainer.classList.add("has-result");
-            containerElement.classList.add("has-result");
-            document.body.classList.add("has-result");
-          }
+          updateSteps(1);
+        })
+        .catch(() => {
+          resultArea.innerHTML =
+            '<div class="firmware-error"><i class="fa-solid fa-circle-exclamation"></i><p>Erro ao carregar firmware.json</p></div>';
         });
-
-      refreshBtn.addEventListener("click", resetForm);
-
-      // Carrega dados estáticos diretamente no código
-      window.addEventListener("DOMContentLoaded", () => {
-        // Dados do firmware incorporados estaticamente
-        data = [
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "MITRASTAR",
-            TIPO: "WI-FI 5",
-            MODELO: "GPT-2541GNAC-N1",
-            FIRMWARE: "BR_g7.7_100VNZ0b41 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "MITRASTAR",
-            TIPO: "WI-FI 5",
-            MODELO: "GPT-2541GNAC-N2",
-            FIRMWARE: "BR_g7.7_100VNZ0b41 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "MITRASTAR",
-            TIPO: "WI-FI 5",
-            MODELO: "GPT-2731GN2A4P",
-            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "MITRASTAR",
-            TIPO: "WI-FI 5",
-            MODELO: "GPT-2731GN2A4P-N2",
-            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "MITRASTAR",
-            TIPO: "WI-FI 5",
-            MODELO: "GPT-2741GNAC-N1",
-            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "MITRASTAR",
-            TIPO: "WI-FI 5",
-            MODELO: "GPT-2741GNAC-N2",
-            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "MITRASTAR",
-            TIPO: "WI-FI 5",
-            MODELO: "GPT-2741GNAC-N2 -SV",
-            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "MITRASTAR",
-            TIPO: "WI-FI 5",
-            MODELO: "GPT-2741GNAC-SV",
-            FIRMWARE: "BR_g8.10_1.11WVK_0_b46 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "MITRASTAR",
-            TIPO: "WI-FI 6",
-            MODELO: "GPT-2742GX4X5v6",
-            FIRMWARE: "GL_g2.5_100XNT0b23_3 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "MITRASTAR",
-            TIPO: "WI-FI 6",
-            MODELO: "GPT-2742GX4X5v6-SV",
-            FIRMWARE: "GL_g2.5_100XNT0b23_3 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 5",
-            MODELO: "RTF3505VW-N1",
-            FIRMWARE: "BR_SV_g000_R3505VWN1001_s44 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 5",
-            MODELO: "RTF3505VW-N2",
-            FIRMWARE: "BR_SV_g000_R3505VWN1001_s44 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 5",
-            MODELO: "RTF3507VW-N1",
-            FIRMWARE: "BR_SV_g000_R3505VWN1001_s44 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 5",
-            MODELO: "RTF3507VW-N2",
-            FIRMWARE: "BR_SV_g000_R3505VWN1001_s44 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 5",
-            MODELO: "RTF8115VW",
-            FIRMWARE: "BR_g14.17_RTF_TEF001_V9.21_V023 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 5",
-            MODELO: "RTF8115VW-SV",
-            FIRMWARE: "BR_g14.17_RTF_TEF001_V9.21_V023 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 5",
-            MODELO: "RTF8117VW",
-            FIRMWARE: "BR_g14.17_RTF_TEF001_V9.21_V023 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 6",
-            MODELO: "RTF8225VW",
-            FIRMWARE: "BR_SV_g2.5_RTF_TEF004_V3.9 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 6",
-            MODELO: "RTF8225VW-SV",
-            FIRMWARE: "BR_SV_g2.5_RTF_TEF004_V3.9 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 7",
-            MODELO: "RTF8316VW",
-            FIRMWARE: "GL_g1.10_R8316_V2.13 - preferred",
-          },
-          {
-            TECNOLOGIA: "HGU",
-            FABRICANTE: "ASKEY",
-            TIPO: "WI-FI 7",
-            MODELO: "RTF8316VW-SX",
-            FIRMWARE: "GL_g1.10_R8316_V2.13 - preferred",
-          },
-          {
-            TECNOLOGIA: "BASEPORT",
-            FABRICANTE: "ASKEY",
-            TIPO: "WIFI 5",
-            MODELO: "RG3110W",
-            FIRMWARE: "GL_g8.8_RG3110W0.6.9 - preferred",
-          },
-          {
-            TECNOLOGIA: "BASEPORT",
-            FABRICANTE: "MITRA",
-            TIPO: "WIFI 6",
-            MODELO: "HGW-500IX4X4-Mv3",
-            FIRMWARE: "GL_g1.11_100XPD0b12 - preferred",
-          },
-          {
-            TECNOLOGIA: "BASEPORT",
-            FABRICANTE: "MITRA",
-            TIPO: "WIFI 5",
-            MODELO: "HGW-500SN2A4-Qv3",
-            FIRMWARE: "GL_g8.6_100WZA0b26 - preferred",
-          },
-          {
-            TECNOLOGIA: "ATA",
-            FABRICANTE: "INTELBRAS",
-            TIPO: "VOZ",
-            MODELO: "ATA200 2P",
-            FIRMWARE: "74.19.50.01 2022-09-22 16:11:26 - preferred",
-          },
-          {
-            TECNOLOGIA: "ATA",
-            FABRICANTE: "INTELBRAS",
-            TIPO: "VOZ",
-            MODELO: "ATA400 4P",
-            FIRMWARE: "74.19.50.01 2022-09-22 16:11:26 - preferred",
-          },
-          {
-            TECNOLOGIA: "ATA",
-            FABRICANTE: "GRANDSTREAM",
-            TIPO: "VOZ",
-            MODELO: "HT812 2P (OUI 000B82) ",
-            FIRMWARE: "1.0.57.1 - preferred",
-          },
-          {
-            TECNOLOGIA: "ATA",
-            FABRICANTE: "GRANDSTREAM",
-            TIPO: "VOZ",
-            MODELO: "HT814 4P (OUI 000B82)",
-            FIRMWARE: "1.0.57.1 - preferred",
-          },
-          {
-            TECNOLOGIA: "ATA",
-            FABRICANTE: "GRANDSTREAM",
-            TIPO: "VOZ",
-            MODELO: "HT818 8P (OUI 000B82)",
-            FIRMWARE: "1.0.57.1 - preferred",
-          },
-          {
-            TECNOLOGIA: "ATA",
-            FABRICANTE: "KHOMP",
-            TIPO: "VOZ",
-            MODELO: "KAP302 2P",
-            FIRMWARE: "V5.2(202304261155) - preferred",
-          },
-          {
-            TECNOLOGIA: "ATA",
-            FABRICANTE: "AUDIOCODES",
-            TIPO: "VOZ",
-            MODELO: "MP202 2P",
-            FIRMWARE: "MP202_4_4_9_build_156 - preferred",
-          },
-          {
-            TECNOLOGIA: "ATA",
-            FABRICANTE: "AUDIOCODES",
-            TIPO: "VOZ",
-            MODELO: "MP204 4P",
-            FIRMWARE: "MP20x_4_4_9_build_156 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "BLU-CASTEL",
-            TIPO: "TV-ETH",
-            MODELO: "HP4500",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "BLU-CASTEL",
-            TIPO: "TV-WIFI",
-            MODELO: "HP4501",
-            FIRMWARE: "MW02.02.20 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "BLU-CASTEL",
-            TIPO: "TV-ETH",
-            MODELO: "HP4569",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "ARRIS",
-            TIPO: "TV-ETH",
-            MODELO: "VIP4242H",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "ARRIS",
-            TIPO: "TV-WIFI",
-            MODELO: "VIP4242W",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "COMMSCOPE",
-            TIPO: "TV-WIFI",
-            MODELO: "VIP4342W",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "ARRIS",
-            TIPO: "TV-WIFI",
-            MODELO: "VIP5242W",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "ARRIS",
-            TIPO: "TV-ETH",
-            MODELO: "VIP5262",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "ARRIS",
-            TIPO: "TV-ETH",
-            MODELO: "VIP5342",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "ARRIS",
-            TIPO: "TV-WIFI",
-            MODELO: "VIP5342W",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "COMMSCOPE",
-            TIPO: "TV-ETH",
-            MODELO: "VIP4342",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "HUMAX",
-            TIPO: "TV-WIFI",
-            MODELO: "PTT100W",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "HUMAX",
-            TIPO: "TV-ETH",
-            MODELO: "PTT100",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-          {
-            TECNOLOGIA: "STB",
-            FABRICANTE: "VANTIVA",
-            TIPO: "TV-WIFI",
-            MODELO: "VIP5642W",
-            FIRMWARE: "MW02.02.19 - preferred",
-          },
-        ];
-
-        // Inicializa o campo de tecnologia
-        const tecnologias = [...new Set(data.map((d) => d.TECNOLOGIA))];
-        populateSelect(technologySelect, tecnologias);
-      });
     </script>
   </body>
 </html>
