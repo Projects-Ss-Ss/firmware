@@ -812,11 +812,17 @@
         const fab = manufacturerSelect.value;
         const tip = typeSelect.value;
         const mod = modelSelect.value;
+
         if (!mod) {
           setValBadge(4, "");
+          updateSteps(4);
           return;
         }
+
         setValBadge(4, mod);
+
+        updateSteps(5);
+
         const found = data.find(
           (d) =>
             d.TECNOLOGIA === tec &&
@@ -824,7 +830,20 @@
             d.TIPO === tip &&
             d.MODELO === mod,
         );
+
         showResult(found, tec, fab, tip, mod);
+
+        // ✅ AJUSTE FINAL — STEP 4 VERDE COM CHECK
+        const step4 = $("step4");
+        const card4 = $("card4");
+
+        step4.classList.remove("active");
+        step4.classList.add("done");
+        step4.innerHTML =
+          '<i class="fa-solid fa-check" style="font-size:11px"></i>';
+
+        card4.classList.remove("active");
+        card4.classList.add("done");
       });
 
       $("resetBtn").addEventListener("click", resetAll);
