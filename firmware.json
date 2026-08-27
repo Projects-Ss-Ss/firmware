@@ -137,14 +137,14 @@
     "FABRICANTE": "ASKEY",
     "TIPO": "WI-FI 7",
     "MODELO": "RTF8316VW",
-    "FIRMWARE": "GL_g1.10_R8316_V2.13 - preferred"
+    "FIRMWARE": "GL_g1.13_R8316_V2.13 - preferred"
   },
   {
     "TECNOLOGIA": "HGU",
     "FABRICANTE": "ASKEY",
     "TIPO": "WI-FI 7",
     "MODELO": "RTF8316VW-SX",
-    "FIRMWARE": "GL_g1.10_R8316_V2.13 - preferred"
+    "FIRMWARE": "GL_g1.13_R8316_V2.13 - preferred"
   },
   {
     "TECNOLOGIA": "BASEPORT",
